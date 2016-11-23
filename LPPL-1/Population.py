@@ -8,6 +8,7 @@ Created on Wed Nov 16 15:59:12 2016
 
 
 import Individual
+import fmin
 import random
 import numpy as np
 
@@ -28,7 +29,7 @@ class Population:
 
         for i in range(size):
             SeedCofs = [random.uniform(a[0], a[1]) for a in limits]  
-            self.populous.append(Individual.Individual(SeedCofs))
+            self.populous.append(fmin.Individual(SeedCofs))
 
     def PopulationPrint(self):
         for x in self.populous:
