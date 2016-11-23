@@ -16,12 +16,12 @@ sns.set_style('whitegrid')
 
 #a, b, tc, m, c, w, phi
 
-def lppl(t,x):   
+def lppl(t,x):
     tc = x[0]
     m = x[1]
     w = x[2]
     phi = x[3]
-    f[t] = np.power(tc - t, m)  
+    f[t] = np.power(tc - t, m)
     g[t] = f[t]*np.cos((w *np.log(tc-t)))+phi
 
     sigma_f = np.sum(f)
@@ -30,10 +30,10 @@ def lppl(t,x):
     sigma_f2 = np.sum(f**2)
     sigma_g2 = np.sum(g**2)
     n = len(DataSeries[0])
-    
+
     matrixA = np.array([ [n, sigma_f, sigma_g],
                          [sigma_f, sigma_f2, sigma_fg],
-                         [sigma_g, sigma_fg, sigma_g2] ])    
+                         [sigma_g, sigma_fg, sigma_g2] ])
     y[t] = DataSeries[1][int(t)]
     sigma_y = np.sum(y)  # yi的取值
     sigma_yf = np.sum(y*f)
@@ -42,14 +42,14 @@ def lppl(t,x):
     matrixB = np.array([ [sigma_y], [sigma_yf], [sigma_yg]])
 
     #lu, piv = scipy.linalg.lu_factor(matrixA)
-    #Y = scipy.linalg.lu_solve((lu,piv), matrixB)    
-    Y = np.dot(np.matrix(matrixA).I,matrixB)    
-    
+    #Y = scipy.linalg.lu_solve((lu,piv), matrixB)
+    Y = np.dot(np.matrix(matrixA).I,matrixB)
+
     a = Y[0]
     b = Y[1]
-    c = Y[2]    
-    obj = a + b*f[t] + c*g[t] 
-    
+    c = Y[2]
+    obj = a + b*f[t] + c*g[t]
+
     #print 'obj:',np.array(obj)[0][0]
     return np.array(obj)[0][0]
 
@@ -66,7 +66,7 @@ def func(x):
     delta = np.power(delta, 2)
     print np.average(delta)
     return np.average(delta)
-    
+
 
 
 class Individual:
@@ -101,10 +101,10 @@ class Individual:
 
     def PrintIndividual(self): #打印结果
         #t, a, b, tc, m, c, w, phi
-        
+
         cofs = "Critical Time: " + str(round(self.cof[0], 3))
         cofs += "m: " + str(round(self.cof[1], 3))
-        
+
         cofs += "omega: " + str(round(self.cof[2], 3))
         cofs += "phi: " + str(round(self.cof[3], 3))
 

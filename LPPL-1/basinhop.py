@@ -43,7 +43,7 @@ def fnon(x):
     matrixA = np.array([ [n, sigma_f, sigma_g],
                          [sigma_f, sigma_f2, sigma_fg],
                          [sigma_g, sigma_fg, sigma_g2] ])
-    
+
     sigma_y = np.sum(DataSeries[1][:t+1])  # yi的取值
     sigma_yf = np.sum(DataSeries[1]*f)
     sigma_yg = np.sum(DataSeries[1]*g)
